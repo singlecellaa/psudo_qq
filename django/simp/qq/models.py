@@ -6,5 +6,6 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     
 class Message(models.Model):
-    sender = models.ForeignKey("User",on_delete=models.CASCADE)
+    sender = models.ForeignKey("User",on_delete=models.CASCADE,null=True,related_name="sender")
+    receiver = models.ForeignKey("User",on_delete=models.CASCADE,null=True,related_name="receiver")
     content = models.TextField()

@@ -22,5 +22,5 @@ from qq import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("register/",views.RegisterView.as_view({"post":"create"})),
-    
+    path("chat",views.ChatView.as_view({"get":"list","post":"create"})),
 ]
