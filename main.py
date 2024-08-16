@@ -15,7 +15,6 @@ if __name__ == "__main__":
     engine = QQmlApplicationEngine()
     qml_file_array = []
     qml_file_array.append(Path(__file__).parent / "qml/Main.qml")
-    #qml_file_array.append(Path(__file__).parent / "opButton.qml")
     
     pprint.pprint(qml_file_array)
     

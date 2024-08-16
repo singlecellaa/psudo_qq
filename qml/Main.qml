@@ -13,7 +13,7 @@ Window {
     Init{id: init}
     Register{id: register}
     Login{id: login}
-    //Chat{}
+    Chat{id: chat}
 
     property string theText : "root text"
     
@@ -37,13 +37,20 @@ Window {
         Connections {
             target: init
             onSend: {
-                console.log("connected 1")
                 stackView.push(register)
             } 
             onSend2: {
-                console.log("connected 2")
                 stackView.push(login)
             } 
+        }
+        Connections{
+            target: register
+            onSend: {
+                stackView.push(chat)
+            }
+            onSend2: {
+                stackView.pop()
+            }
         }
         
     }
