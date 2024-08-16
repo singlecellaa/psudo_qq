@@ -1,19 +1,24 @@
 import QtQuick
+import QtQuick.Controls
+import "../../"
+import ".."
 
-Rectangle{
+
+Page{
     id: root
     
     anchors.fill: parent
     Column{
+        anchors.centerIn: parent
+        spacing: 10
         Text{
             text: "register"
             font.pointSize: 20
         }
         Repeater{
-            spacing: 10
             model: ["name","password"]
             delegate: Column{
-                Text{
+                TextInput{
                     text: modelData
                 }
                 Rectangle{
@@ -22,13 +27,14 @@ Rectangle{
                 }
             }
         }
-        Row{
-            opButton{
-                operation: "register"
-            }
-            cancelButton{
-            }
-        }
+        // Row{
+        //     OpButton{
+        //         operation: "register"
+        //     }
+        //     OpButton{
+        //         operation: "cancel"
+        //     }
+        // }
     }
     
 }
