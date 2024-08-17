@@ -14,7 +14,7 @@ Window {
     Register{id: register}
     Login{id: login}
     Chat{id: chat}
-
+    DBManager{}
     property string theText : "root text"
     
     Item{

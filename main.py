@@ -13,6 +13,7 @@ def load():
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
+    engine.setOfflineStoragePath("E:/qt_project/pyside/simplified_qq_py")
     qml_file_array = []
     qml_file_array.append(Path(__file__).parent / "qml/Main.qml")
     

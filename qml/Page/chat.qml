@@ -1,12 +1,21 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import ".."
 
 Item{
+    id: root
     anchors.fill: parent
+    ChatManager{id: chatManager}
+
+    property int currentIndex
+    signal send()
+    onSend: console.log("chat page send")
+
     Column{
         id: column
         Repeater{
+            id: peopleNum
             model: ["dialog1","dialog2"]
             Button{
                 id: button
@@ -22,59 +31,58 @@ Item{
         anchors.left: column.right
         width: parent.width - column.width
         height: parent.height
-        Rectangle{
-            id: backgroundBoard
-            color: "red"
-            ScrollView{
-                width: parent.width
-                height: parent.height - inputRect.height
-                Text{
-                    id: textView
-                    anchors.centerIn: parent
-                    text: "line\nline\nline"
-                    font.pointSize: 100
-                }
-            }
 
-            Rectangle{
-                id: inputRect
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 50
-                height: 100
-                border.width: 2
-                TextInput{
-                    id: textInput
-                    anchors.fill: parent
-                    cursorVisible: true
-
-                }
-                Button{
-                    width: text.width + 10
-                    height: text.height + 2
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    background: Rectangle{
+        Repeater{
+            id: layoutRepeater
+            model: peopleNum.count
+            delegate: Rectangle{
+                color: "grey"
+                ScrollView{
+                    id: scrollView
+                    width: parent.width
+                    height: parent.height - inputRect.height
+                    Column{
                         anchors.fill: parent
-                        border.width: 2
-                        color: "lightBlue"
-                    }
-                    Text{
-                        id: text
-                        anchors.centerIn: parent
-                        text: "send"
-                        color: "white"
-                    }
-                    onClicked: {
-                        textInput.clear()
+                        spacing: 10
+                        Repeater{
+                            model: ListModel{
+                                ListElement {theContent: "hello"; sender: 0}
+                                ListElement {theContent: "hello"; sender: 1}
+                            }
+                            delegate: Rectangle{
+                                anchors.right: parent.right
+                                width: 100
+                                height: 20
+                                Text{
+                                    anchors.centerIn: parent
+                                    text: "say " + model.sender + " " + model.theContent
+                                    font.pointSize: 10
+                                }
+                            }
+                        }
                     }
                 }
+                InputRect {id: inputRect}
+                Component.onCompleted: {
+                    inputRect.onSend.connect(send)
+                }
             }
-
-        }
-        Rectangle{
-            color: "green"
         }
     }
-    
+    Item{
+        Connections{
+            target: root
+            onSend: {
+                console.log("input connect")
+            }
+        }
+    }
+    Binding {
+        target: root
+        property: "currentIndex"
+        value: stackLayout.currentIndex
+    }
+    Component.onCompleted: {
+        root.onSend.connect(chatManager.send)
+    }
 }
