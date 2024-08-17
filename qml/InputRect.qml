@@ -36,7 +36,6 @@ Rectangle{
             id: text
             anchors.centerIn: parent
             text: "send"
-            color: "white"
         }
         onClicked: {
             theText = textInput.text

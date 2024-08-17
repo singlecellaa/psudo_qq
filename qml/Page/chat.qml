@@ -8,9 +8,12 @@ Item{
     anchors.fill: parent
     ChatManager{id: chatManager}
 
-    property int currentIndex
+    property string textInput
+    property var model 
+    property var scrollView
+    property string imagePath
+
     signal send()
-    onSend: console.log("chat page send")
 
     Column{
         id: column
@@ -45,24 +48,28 @@ Item{
                         anchors.fill: parent
                         spacing: 10
                         Repeater{
-                            model: ListModel{
-                                ListElement {theContent: "hello"; sender: 0}
-                                ListElement {theContent: "hello"; sender: 1}
-                            }
-                            delegate: Rectangle{
-                                anchors.right: parent.right
-                                width: 100
-                                height: 20
-                                Text{
-                                    anchors.centerIn: parent
-                                    text: "say " + model.sender + " " + model.theContent
-                                    font.pointSize: 10
-                                }
-                            }
+                            id: messageRepeater
+                            model: ListModel{}
+                            delegate: Message{scrollViewWidth: scrollView.width}
                         }
                     }
                 }
                 InputRect {id: inputRect}
+                Binding{
+                    target: root
+                    property: "textInput"
+                    value: inputRect.theText
+                }
+                Binding{
+                    target: root
+                    property: "model"
+                    value: messageRepeater.model
+                }
+                Binding{
+                    target: root
+                    property: "scrollView"
+                    value: scrollView
+                }
                 Component.onCompleted: {
                     inputRect.onSend.connect(send)
                 }
@@ -70,18 +77,23 @@ Item{
         }
     }
     Item{
-        Connections{
-            target: root
-            onSend: {
-                console.log("input connect")
-            }
+        Binding{
+            target: chatManager
+            property: "textInput"
+            value: root.textInput
+        }
+        Binding{
+            target: chatManager
+            property: "model"
+            value: root.model
+        }
+        Binding{
+            target: chatManager
+            property: "scrollView"
+            value: root.scrollView
         }
     }
-    Binding {
-        target: root
-        property: "currentIndex"
-        value: stackLayout.currentIndex
-    }
+    
     Component.onCompleted: {
         root.onSend.connect(chatManager.send)
     }
