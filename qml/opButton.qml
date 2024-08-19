@@ -6,17 +6,16 @@ Button{
     property string operation
     property string theColor: "lightGreen"
     width: 50
-    height: 20
+    height: 30
     background: Rectangle{
         width: root.width
         height: root.height
         color: theColor
-        border{
-            width: 2
-            color: "white"
-        }
     }
     Text{
         text: operation
+        color: "white"
+        anchors.centerIn: parent
+        
     }
 }
