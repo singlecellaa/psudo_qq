@@ -128,10 +128,10 @@ Page{
                     }
                 }
             }
-            MyTextInput{theText: "手机号码"; theWidth: 140}
+            MyTextInput{theText: "手机号码"; width: 140}
         }
         Row{
-            MyTextInput{theText: "短信验证码"; theWidth: 100}
+            MyTextInput{theText: "短信验证码"; width: 100}
             Button{
                 background: Rectangle{
                     color: "white"

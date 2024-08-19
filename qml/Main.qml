@@ -27,13 +27,11 @@ Window {
         states: [
             State{
                 name: "init"
-                PropertyChanges {target: root; maximumHeight: height }
-                PropertyChanges {target: root; minimumHeight: height }
-                PropertyChanges {target: root; maximumWidth: width   }
-                PropertyChanges {target: root; minimumWidth: width   }
-                PropertyChanges {target: root; width: 350            }
-                PropertyChanges {target: root; height: 350 * 12 / 9}
                 
+                PropertyChanges {target: root; maximumWidth: 350   }
+                PropertyChanges {target: root; minimumWidth: 350   }
+                PropertyChanges {target: root; maximumHeight:  350 * 12 / 9}
+                PropertyChanges {target: root; minimumHeight:  350 * 12 / 9}
             },
             State{
                 name: "main"
@@ -67,7 +65,16 @@ Window {
                 item.state = "init"
             }
         }
-        
+        Connections{
+            target: login
+            onSend: {
+                stackView.push(chat)
+                item.state = "main"
+            }
+            onSend2: {
+                stackView.pop()
+            }
+        }
     }
     StackView{
         id: stackView 

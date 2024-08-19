@@ -3,8 +3,8 @@ import QtQuick
 Rectangle{
     id: root
     property string theText
-    property int theWidth: 180
-    width: theWidth
+    property string textColor: "grey"
+    width: 180
     height: 30
     TextInput{
         id: textInput
@@ -13,9 +13,10 @@ Rectangle{
         verticalAlignment: TextInput.AlignVCenter
         font.pointSize: 12
         Text{
+            id: text
             anchors.verticalCenter: parent.verticalCenter
             text: textInput.text == "" ? " " + theText : ""
-            color: "grey"
+            color: textColor
             font.weight: Font.DemiBold
         }
     }
