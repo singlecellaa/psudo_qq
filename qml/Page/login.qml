@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Universal
 import ".."
 
 Page{
@@ -19,6 +20,8 @@ Page{
     signal send3()
     onSend3: moreChoice.open()
 
+    signal send4()
+    
     Column{
             anchors.centerIn: parent
             spacing: 20
@@ -56,12 +59,7 @@ Page{
                         }
                     }
                 }
-                CheckBox{
-                    Text{
-                        text: "已阅读并同意服务协议和隐私保护指引"
-                        color: "lightGrey"
-                    }
-                }
+                MyCheckBox{theText: "已阅读并同意服务协议和隐私保护指引"}
                 
             }
             OpButton{
@@ -90,6 +88,7 @@ Page{
                     }
                 }
                 Repeater{
+                    id: choiceRepeater
                     model: ["注册账号","忘记密码"]
                     delegate: MenuItem{
                         height: 25
@@ -144,6 +143,7 @@ Page{
         login.onClicked.connect(send)
         repeater.itemAt(0).onClicked.connect(send2)
         repeater.itemAt(1).onClicked.connect(send3)
+        choiceRepeater.itemAt(0).onClicked.connect(send4)
     }
     
 }

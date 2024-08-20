@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Material
 import ".."
 
 Page{
@@ -13,10 +14,7 @@ Page{
     
 
     signal send()
-    onSend: console.log("send1")
-    
     signal send2()
-    onSend2: console.log("send2")
 
     Column{
             anchors.centerIn: parent

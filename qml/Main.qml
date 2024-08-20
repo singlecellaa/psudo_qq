@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Basic
 import "Page"
 
 Window {
@@ -14,13 +15,13 @@ Window {
     minimumHeight: height 
     maximumWidth: width   
     minimumWidth: width
-
-    Init{id: init}
-    Register{id: register}
-    Login{id: login}
-    Chat{id: chat}
-    DBManager{}
-    property string theText : "root text"
+    Item{
+        Init{id: init}
+        Register{id: register}
+        Login{id: login}
+        Chat{id: chat}
+        DBManager{}
+    }
     
     Item{
         id: item
@@ -47,32 +48,41 @@ Window {
         
         Connections {
             target: init
-            onSend: {
+            function onSend() {
+                stackView.pop()
                 stackView.push(register)
                 item.state = "main"
             } 
-            onSend2: {
+            function onSend2() {
+                stackView.pop()
                 stackView.push(login)
             } 
         }
         Connections{
             target: register
-            onSend: {
+            function onSend() {
+                stackView.pop()
                 stackView.push(chat)
             }
-            onSend2: {
+            function onSend2() {
                 stackView.pop()
                 item.state = "init"
             }
         }
         Connections{
             target: login
-            onSend: {
+            function onSend() {
+                stackView.pop()
                 stackView.push(chat)
                 item.state = "main"
             }
-            onSend2: {
+            function onSend2() {
                 stackView.pop()
+            }
+            function onSend4() {
+                stackView.pop()
+                stackView.push(register)
+                item.state = "main"
             }
         }
     }

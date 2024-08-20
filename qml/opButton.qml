@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
 Button{
     id: root
@@ -13,11 +14,10 @@ Button{
         height: root.height
         radius: root.radius
         color: theColor
-    }
-    Text{
-        text: operation
-        color: "white"
-        anchors.centerIn: parent
-        
+        Text{
+            text: operation
+            color: "white"
+            anchors.centerIn: parent     
+        }
     }
 }

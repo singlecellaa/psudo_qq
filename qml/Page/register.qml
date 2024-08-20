@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Universal
 import ".."
 
 
@@ -148,9 +149,7 @@ Page{
                 
             }
         }
-        CheckBox{
-            text: "我已阅读并同意服务协议和隐私保护指引"
-        }
+        MyCheckBox{theText: "我已阅读并同意服务协议和隐私保护指引"; textColor: "black"}
         Row{
             spacing: 20
             OpButton{
