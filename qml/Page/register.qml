@@ -13,13 +13,7 @@ Page{
 
     anchors.fill: parent
     signal send()
-    onSend: {
-        console.log("send1")
-    }
     signal send2()
-    onSend2: {
-        console.log("send2")
-    }
     Image{
         source: "../../resources/qq3.png"
         x: 30

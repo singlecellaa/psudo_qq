@@ -14,14 +14,11 @@ Page{
     
 
     signal send()
-    
     signal send2()
-
     signal send3()
     onSend3: moreChoice.open()
-
     signal send4()
-    
+
     Column{
             anchors.centerIn: parent
             spacing: 20
@@ -145,5 +142,4 @@ Page{
         repeater.itemAt(1).onClicked.connect(send3)
         choiceRepeater.itemAt(0).onClicked.connect(send4)
     }
-    
 }

@@ -2,21 +2,15 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-Rectangle{
+Flickable{
     id: root
-    
+    // color: "transparent"
     signal send()
-    onSend:{
-        console.log("inputRect send")
-    }
 
     property string theText
 
-    anchors.bottom: parent.bottom
-    anchors.horizontalCenter: parent.horizontalCenter
-    width: parent.width - 50
+    width: parent.width
     height: 100
-    border.width: 2
     TextInput{
         id: textInput
         anchors.fill: parent
@@ -30,7 +24,6 @@ Rectangle{
         anchors.bottom: parent.bottom
         background: Rectangle{
             anchors.fill: parent
-            border.width: 2
             color: "lightBlue"
         }
         Text{

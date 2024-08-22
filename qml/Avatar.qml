@@ -8,6 +8,7 @@ Image {
 
     width: 40
     height: width
+    fillMode: Image.PreserveAspectCrop
     source: imagePath + fileName
     layer.enabled: true
     layer.effect: OpacityMask {

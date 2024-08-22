@@ -28,7 +28,6 @@ Window {
         states: [
             State{
                 name: "init"
-                
                 PropertyChanges {target: root; maximumWidth: 350   }
                 PropertyChanges {target: root; minimumWidth: 350   }
                 PropertyChanges {target: root; maximumHeight:  350 * 12 / 9}
@@ -36,10 +35,10 @@ Window {
             },
             State{
                 name: "main"
-                PropertyChanges {target: root; maximumHeight: 2000 }
-                PropertyChanges {target: root; minimumHeight: 500 }
-                PropertyChanges {target: root; maximumWidth: 2000   }
-                PropertyChanges {target: root; minimumWidth: 350   }
+                PropertyChanges {target: root; maximumHeight: 16777215 }
+                PropertyChanges {target: root; minimumHeight: 10 }
+                PropertyChanges {target: root; maximumWidth: 16777215   }
+                PropertyChanges {target: root; minimumWidth: 10   }
                 PropertyChanges { target: root; height: 640 }
                 PropertyChanges { target: root; width: 640 * 16 / 9}
             }
