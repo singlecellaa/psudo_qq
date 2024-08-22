@@ -1,29 +1,35 @@
 import QtQuick
 import QtQuick.Controls
-Row{
+Rectangle{
     property int sender: model.sender
     property string theText: model.theText
     property var scrollViewWidth
 
+    color: "transparent"
+    width: text.width + image.width
+    height: text.height + image.height
+
     Rectangle{
-        width: text.width
-        height: 20
-        x: sender === 0 ? scrollViewWidth - image.width - width: image.width
+        width: text.width + 20
+        height: 30
+        x: sender === 0 ? image.x - width - 5 : image.width
         anchors.bottom: image.bottom
-        
+        color: "#438cfa"
+        radius: 5
         
         Text{
             id: text
             anchors.centerIn: parent
             text: theText
             font.pointSize: 10
+            color: "white"
         }
     }
-    Image{
+    Avatar{
         id: image
         width: 40
         height: 40
-        x: sender === 0 ? scrollViewWidth - width : 0
+        x: sender === 0 ? scrollViewWidth - width - 80 : 0
         source: "../resources/fly_neko.png"
     }
 }

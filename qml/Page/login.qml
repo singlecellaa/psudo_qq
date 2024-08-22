@@ -65,7 +65,6 @@ Page{
                 height: 37
                 radius: 4
                 operation: "登录"
-                theColor: "#2c51f5"
             }
             Rectangle{
                 width: 10

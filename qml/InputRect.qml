@@ -2,40 +2,35 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
-Flickable{
+Rectangle{
     id: root
-    // color: "transparent"
     signal send()
 
+    color: "transparent"
     property string theText
 
     width: parent.width
     height: 100
+    focus: true
     TextInput{
         id: textInput
         anchors.fill: parent
         cursorVisible: true
     }
-    Button{
+    OpButton{
         id: button
-        width: text.width + 10
-        height: text.height + 2
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        background: Rectangle{
-            anchors.fill: parent
-            color: "lightBlue"
-        }
-        Text{
-            id: text
-            anchors.centerIn: parent
-            text: "send"
-        }
+        width: 80
+        height: 25
+        operation: "发送"
+        theColor: "#438cfa"
+        x: root.width - width - 80
+        y: root.height - height - 20
         onClicked: {
             theText = textInput.text
             textInput.clear()
         }
     }
+
     Component.onCompleted: {
         button.onClicked.connect(send)
     }

@@ -8,5 +8,4 @@ MouseArea{
     hoverEnabled: true
     onEntered: parent.color = darker_color
     onExited: parent.color = default_color
-    onClicked: stackLayout.currentIndex =  1
 }

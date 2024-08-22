@@ -8,11 +8,14 @@ Rectangle{
     property string h_icon_
     width: 40; height: width
     color: "transparent"
-    x: qq5.x + 7
+    x: col1_top_icon.x + 7
     radius: 4
     Image{
         id: icon1
         anchors.centerIn: parent
+        width: 35
+        height: 35
+        fillMode: Image.PreserveAspectCrop
         source: icon_listView.currentIndex == index ? imagePath + h_icon_ : imagePath + icon_
     }
     MouseArea {

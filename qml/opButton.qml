@@ -5,8 +5,8 @@ import QtQuick.Controls.Material
 Button{
     id: root
     property string operation
-    property string theColor: "lightGreen"
-    property int radius
+    property string theColor: "#2c51f5"
+    property int radius: 4
     width: 50
     height: 30
     background: Rectangle{
