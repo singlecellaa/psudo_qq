@@ -25,7 +25,6 @@ Page{
 
     Row {
         anchors.fill: parent
-
         //COLUMN1
         Rectangle{
             width: column1.width
@@ -104,7 +103,6 @@ Page{
                 //column2 main layout
                 StackLayout{
                     id: stackLayout2
-                    // height: 
                     //chat list view
                     ListView{
                         id: col2ChatListView
@@ -114,9 +112,9 @@ Page{
                         }
                         delegate: Rectangle{
                             id: column2Rect
-                            width: column2Width
-                            height: 80
-                            color: "lightGrey"
+                            width: column2Width; height: 80
+                            property int itemIndex: index
+                            color: col2ChatListView.currentIndex === index ? "#1b9af5" : "white"
                             Row{
                                 spacing: 10
                                 Space{ width: 5}
@@ -128,13 +126,20 @@ Page{
                                     Text {id: lastTime; text: model.time; color: "grey";      y: 12; anchors.right: parent.right; anchors.rightMargin: 15}
                                 }
                             }
-                            MouseGrey{
+                            MouseArea{
+                                id: col2MouseArea
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onEntered: parent.color = col2ChatListView.currentIndex === index ? "#1b9af5" : "lightGrey"
+                                onExited: parent.color = col2ChatListView.currentIndex === index ? "#1b9af5" : "white"
                                 onClicked: {
                                     col2ChatListView.currentIndex = index
+                                    for(var i=0; i < col2ChatListView.count; i++){
+                                        var item = col2ChatListView.itemAtIndex(i)
+                                        item.color = item.itemIndex === index ? "#1b9af5" : "white"
+                                    }
                                     root.messageIndex = index
-                                    stackLayout3.currentIndex = index + 1; 
-                                    console.log("root.messageIndex: " + root.messageIndex)
-                                    console.log("stackLayout3 index: " + stackLayout3.currentIndex)
+                                    stackLayout3.currentIndex = index + 1 + 2; 
                                 }
                             }
                         }
@@ -169,7 +174,7 @@ Page{
                                     hoverEnabled: true
                                     onEntered: parent.color = "lightGrey"
                                     onExited: parent.color = "white"
-                                    onClicked: stackLayout3.currentIndex =  1
+                                    onClicked: stackLayout3.currentIndex =  index + 1
                                 }
                             }
                         }
@@ -278,6 +283,42 @@ Page{
                     id: defaultRect
                     color: "transparent"
                     Image{source: imagePath + "qq6.png";  anchors.centerIn: parent}
+                }
+                // pal & group notice
+                Repeater{
+                    model: notice_model
+                    delegate:  Rectangle{
+                        id: pal_notice_rect
+                        color: "transparent"
+                        Text {id: notice_name; text: model.name; font.pointSize: 12; x: 15; y: 20 }
+                        ListView{
+                            width: 500; height: root.height - 40
+                            anchors.top: notice_name.bottom; anchors.topMargin: 20; anchors.horizontalCenter: parent.horizontalCenter; anchors.horizontalCenterOffset: -30
+                            model: stackLayout3.noticeModels[index]
+                            delegate: Rectangle{
+                                width: 500; height: 80
+                                radius: 8
+                                Row{
+                                    spacing: 5
+                                    height: parent.height
+                                    leftPadding: 10
+                                    Avatar{fileName: model.icon; y: parent.height/2 - height/2}
+                                    Column{
+                                        topPadding: 20
+                                        spacing: 7
+                                        Row{
+                                            spacing: 5
+                                            Text {text: model.name; color: "#1b9af5"}
+                                            Text {text: model.content}
+                                            Text {text: model.date_; color: "grey"}
+                                        }
+                                        Text {text: "留言： " + model.message; color: "grey";}
+                                    }
+                                }
+                                Text{text: model.state_; color: "grey";anchors.verticalCenter: parent.verticalCenter; anchors.right: parent.right; anchors.rightMargin: 10}
+                            }
+                        }
+                    }
                 }
                 //chat layer
                 Repeater{
@@ -410,7 +451,7 @@ Page{
                 }
                 ListModel{
                     id: pal_notice_model
-                    ListElement {icon: ""; name: ""; content: ""; message: ""}
+                    ListElement {icon: "yanami.png"; name: "yanami"; content: "请求加为好友"; date_: "2024/07/01"; message: "I'm yanami"; state_: "已同意"}
                 }
                 ListModel{
                     id: group_notice_model

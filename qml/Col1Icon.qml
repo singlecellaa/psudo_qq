@@ -26,6 +26,7 @@ Rectangle{
         onClicked: {
             stackLayout2.currentIndex = index
             icon_listView.currentIndex = index
+            stackLayout3.currentIndex = 0
         }
     }
 }
