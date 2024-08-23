@@ -58,6 +58,7 @@ ListView{
             //pal list
             ListView{
                 id: listView1
+                interactive: false
                 width: column2Width
                 height: 0
                 model: root.col2Models_[index]

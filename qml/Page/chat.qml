@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
+import Qt.labs.platform 
 import ".."
 
 Page{
@@ -16,7 +16,6 @@ Page{
 
     signal send()
     onSend: {
-        console.log("root connect")
         if(textInputContent == "")
             console.log("no input")
         else
@@ -27,6 +26,7 @@ Page{
         anchors.fill: parent
         //COLUMN1
         Rectangle{
+            id: column1Rect
             width: column1.width
             height: root.height
             color: "#d9d8d2"
@@ -106,6 +106,7 @@ Page{
                     //chat list view
                     ListView{
                         id: col2ChatListView
+                        interactive: false
                         model: ListModel{
                             ListElement {icon: "qq4.png"; name: "group1"; time: "2024/08/20"}
                             ListElement {icon: "kaju.png"; name: "kaju"; time: "2024/08/22"}
@@ -272,7 +273,8 @@ Page{
         }
         //LAYOUT3
         Rectangle{
-            width: parent.width - column2Width
+            id: layout3Rect
+            width: parent.width - column1Rect.width - column2Width
             height: parent.height
             color: Qt.lighter("lightGrey",1.15)
             StackLayout{
@@ -353,6 +355,7 @@ Page{
                             anchors.top: topMenu.bottom
                             anchors.topMargin: 10
                             anchors.bottom: bottomRect.top
+                            // contentWidth: parent.width
                             Column{
                                 width: parent.width
                                 spacing: 10
@@ -399,6 +402,7 @@ Page{
                                 width: parent.width; height: 30; spacing: 0; leftMargin: 10; topMargin: 5
                                 anchors.top: line2.bottom
                                 orientation: ListView.Horizontal
+                                interactive: false
                                 model: ListModel{
                                     ListElement{icon: "emoji1_icon.png"; h_icon: "emoji2_icon.png"}
                                     ListElement{icon: "cut1_icon.png"; h_icon: "cut2_icon.png"}
@@ -421,10 +425,26 @@ Page{
                                     MouseArea {
                                         anchors.fill: parent
                                         hoverEnabled: true
-                                        onEntered: icon1.source = imagePath + h_icon
-                                        onExited: icon1.source = imagePath + icon
+                                        onEntered: {
+                                            icon1.source = imagePath + h_icon
+                                            // fileDialog.open()
+                                        }
+                                        onExited: {
+                                            icon1.source = imagePath + icon
+                                            // fileDialog.close()
+                                        }
                                         onClicked: {
                                             icon_row.currentIndex = index
+                                            fileDialog.open()
+                                        }
+                                    }
+                                    FileDialog{
+                                        id: fileDialog
+                                        title: "open file"
+                                        // selectExisting: true
+                                        onAccepted: {
+                                            var fileUrl = fileDialog.file
+                                            console.log("selected file: ", fileUrl)
                                         }
                                     }
                                 }

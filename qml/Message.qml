@@ -10,19 +10,22 @@ Rectangle{
     height: text.height + image.height
 
     Rectangle{
-        width: text.width + 20
-        height: 30
+        width: text.contentWidth + 20
+        height: text.contentHeight + 20
         x: sender === 0 ? image.x - width - 5 : image.width
-        anchors.bottom: image.bottom
+        y: image.y + image.height / 2
         color: "#438cfa"
         radius: 5
         
         Text{
             id: text
             anchors.centerIn: parent
+            width:  implicitWidth > layout3Rect.width - 160 ? layout3Rect.width - 160 : implicitWidth
             text: theText
             font.pointSize: 10
             color: "white"
+            wrapMode: Text.Wrap
+            textFormat: Text.RichText
         }
     }
     Avatar{
