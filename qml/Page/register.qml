@@ -6,7 +6,7 @@ import ".."
 
 Page{
     id: root
-    
+
     background: Image{
         source: "../../resources/register_background.jpg"
     }
@@ -14,23 +14,21 @@ Page{
     anchors.fill: parent
     signal send()
     signal send2()
-    Image{
-        source: "../../resources/qq3.png"
-        x: 30
-        y: 20
-    }
+    Image{ source: "../../resources/qq3.png"; x: 30; y: 20}
+
+    //top row
     Row{
         topPadding: 10
         anchors.right: parent.right
         spacing: 20
+        //qq靓号
         Control{
             id: icon
             contentItem: Image{
                 source: "../../resources/qq_account.png"
             }
         }
-        
-        
+        //lang menu
         Column{
             id: langColumn
             y: 5
@@ -68,8 +66,7 @@ Page{
                 }
             }
         }
-        
-        
+        //意见反馈
         Button{
             anchors.verticalCenter: icon.verticalCenter
             hoverEnabled: false
@@ -81,20 +78,13 @@ Page{
                 color: "transparent"
             }
         }
-
     }
     Column{
         anchors.centerIn: parent
         width: 150
         spacing: 10
-        Text{
-            text: "欢迎注册"
-            font.pointSize: 20
-        }
-        Text{
-            text: "每一天，乐在沟通"
-            font.pointSize: 10
-        }
+        Text{ text: "欢迎注册"; font.pointSize: 20 }
+        Text{ text: "每一天，乐在沟通"; font.pointSize: 10}
         Repeater{
             model: ["昵称","密码"]
             delegate: MyTextInput{theText: modelData}
@@ -107,10 +97,7 @@ Page{
                 text: "+86"
                 font.pointSize: 10
                 hoverEnabled: false
-                background: Rectangle{
-                    anchors.fill: parent
-                    color: "white"
-                }
+                background: Rectangle{ anchors.fill: parent}
                 onClicked: regionMenu.open()
                 Menu{
                     id: regionMenu

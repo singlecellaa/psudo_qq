@@ -20,7 +20,7 @@ Window {
         Register{id: register}
         Login{id: login}
         Chat{id: chat}
-        DBManager{}
+        // DBManager{}
     }
     
     Item{
